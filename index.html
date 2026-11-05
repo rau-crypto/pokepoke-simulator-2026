@@ -87,9 +87,8 @@ document.addEventListener('DOMContentLoaded',()=>{
  const packInfo={
  A1:['通常5枚。パックの種類ごとに確率を取得。',5],A1a:['通常5枚。パックの種類ごとに確率を取得。',5],A2:['通常5枚。パックの種類ごとに確率を取得。',5],A2a:['通常5枚。パックの種類ごとに確率を取得。',5],A2b:['通常5枚。パックの種類ごとに確率を取得。',5],A3:['通常5枚。パックの種類ごとに確率を取得。',5],A3a:['通常5枚。パックの種類ごとに確率を取得。',5],A3b:['通常5枚。パックの種類ごとに確率を取得。',5],A4:['通常5枚。パックの種類ごとに確率を取得。',5],A4a:['通常5枚。パックの種類ごとに確率を取得。',5],A4b:['ハイクラス系。実データの枠数に合わせて計算。',5],B1:['通常5枚。パックの種類ごとに確率を取得。',5],B1a:['通常5枚。パックの種類ごとに確率を取得。',5],B2:['通常5枚。パックの種類ごとに確率を取得。',5],B2a:['通常5枚。パックの種類ごとに確率を取得。',5],B2b:['通常5枚。パックの種類ごとに確率を取得。',5],B3:['通常5枚。パックの種類ごとに確率を取得。',5],B3a:['通常5枚。パックの種類ごとに確率を取得。',5],B3b:['通常5枚。パックの種類ごとに確率を取得。',5],B4:['通常5枚。パックの種類ごとに確率を取得。',5],B4a:['通常5枚。パックの種類ごとに確率を取得。',5],B4b:['ハイクラス系。実データの枠数に合わせて計算。',5],C1:['通常5枚。パックの種類ごとに確率を取得。',5],SP1:['特殊パック。実データの枠数に合わせて計算。',5]
  };
- const SETS_URL='https://raw.githubusercontent.com/Vociferix/ptcgp-data/main/data/sets.json';
- const PULL_DIR_API='https://api.github.com/repos/Vociferix/ptcgp-data/contents/data/pull_rates/';
- const PULL_RAW='https://raw.githubusercontent.com/Vociferix/ptcgp-data/main/data/pull_rates/';
+const SETS_URL='https://raw.githubusercontent.com/Vociferix/ptcgp-data/master/data/sets.json';
+const PULL_RAW='https://raw.githubusercontent.com/Vociferix/ptcgp-data/master/data/pull_rates/';
  const CARDS_URL='https://cdn.jsdelivr.net/npm/pokemon-tcg-pocket-database@2.12.0/dist/cards.min.json';
  let cardDatabase=[],setDatabase=[],activePull=null,activeRates=null,rateMode='manual',history=[];
  const norm=s=>String(s||'').normalize('NFKD').toLowerCase().replace(/[^a-z0-9]/g,'');
@@ -198,7 +197,7 @@ document.addEventListener('DOMContentLoaded',()=>{
    let r=Math.random(),sum=0;for(const v of list){sum+=v.rate;if(r<sum)return v;}return list[list.length-1];
  }
  function one(c){
-   const name=$('target').selectedOptions[0]?.dataset.name||$('target').value.trim()||'狙いのカード';
+   const name = $('target').value.trim() || 'Target card';
    if(c.auto){
      const v=weightedVariant(c.auto),names=[];let hits=0;
      v.slots.forEach((p,i)=>{if(p===null||p===undefined)return;const hit=Math.random()<p;if(hit)hits++;names.push({name:hit?name:'別のカード',hit,slot:i+1});});
