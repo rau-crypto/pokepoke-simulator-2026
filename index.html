@@ -145,7 +145,7 @@ document.addEventListener('DOMContentLoaded',()=>{
    if(!$('cardSelect').value||!$('packSubtitle').value){updateRateStatus('カードとパックの種類を選択すると、自動確率を取得します。');return;}
    updateRateStatus('選択したカードの確率データを取得しています…');
    try{
-     const setCode=$('pack').value,number=String(Number($('cardSelect').value)),pull=await getPullRateFile(setCode,$('packSubtitle').value);
+     const setCode = $('pack').value, number = String($('cardSelect').value).padStart(3, '0'), pull = await getPullRateFile(setCode, $('packSubtitle').value);
      const variants=pull.variants||{},out=[];
      for(const [key,v] of Object.entries(variants)){
        const variantRate=frac(v.rate);if(variantRate===null)continue;
